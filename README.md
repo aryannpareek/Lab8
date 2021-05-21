@@ -9,11 +9,11 @@ A. Within a Github action that runs whenever code is pushed
 
 2. Would you use a unit test to test the “message” feature of a messaging application? Why or why not? For this question, assume the “message” feature allows a user to write and send a message to another user.
 
-No. You would be testing individual components of the messaging feature rather than the entire feature as a whole. Messaging acts on an application/feature level.
+No. You would have to test individual components of the messaging feature rather than the entire feature as a whole. Messaging acts on an application/feature level, so unit tests would not be feasible since there would be many interacting parts.
 
 3. Would you use a unit test to test the “max message length” feature of a messaging application? Why or why not? For this question, assume the “max message length” feature prevents the user from typing more than 80 characters
 
-Yes, since this is a smaller part of a feature which can be tested on its own
+Yes, since this is a smaller part of a feature which can be tested on its own without impacting the application as a whole. Since we know what the max message length is, it would be easy to implement and encapsulate in a single test.
 
 4. What do you expect to happen if we run our puppeteer tests with the field “headless” set to true?
 
@@ -21,5 +21,9 @@ The tests will run, but there will be no browser UI such as Chromium. You can't 
 
 5. What would your beforeAll callback look like if you wanted to start from the settings page before every test case?
 
-Since this is a single page app, we can't just direct the app to go to the settings page through a URL. Instead, we could modify the page contents by simulating a click to the settings page, which would change the URL and page contents to the correct values.
+beforeAll(async () => {
+    await page.goto('http://127.0.0.1:5500');
+    await page.waitForTimeout(500);
+    await page.click('header > img');
+});
 

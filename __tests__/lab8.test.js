@@ -4,6 +4,12 @@ describe('Basic user flow for SPA ', () => {
     await page.waitForTimeout(500);
   });
 
+  /*beforeAll(async () => {
+    await page.goto('http://127.0.0.1:5500');
+    await page.waitForTimeout(500);
+    await page.click('header > img');
+  });*/
+
   // test 1 is given
   it('Test1: Initial Home Page - Check for 10 Journal Entries', async () => {
     const numEntries = await page.$$eval('journal-entry', (entries) => {
